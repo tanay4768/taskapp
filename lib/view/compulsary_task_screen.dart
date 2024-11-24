@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:outtaskapp/temprorytaskscreen.dart';
+import 'package:outtaskapp/view/temprory_task_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
-import 'compulsorytaskprovider.dart';
+import '../provider/compulsorytask_provider.dart';
 
 
 class CompulsoryTaskScreen extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CompulsoryTaskScreenState extends State<CompulsoryTaskScreen> {
       statusBarIconBrightness: Brightness.light, // Light icons for status bar
     ));
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.task_alt, color: Colors.black,), label: "Today's Task"),
         BottomNavigationBarItem(icon: Icon(Icons.local_fire_department_rounded, color: Colors.blue,),
         label: "Daily Task")
@@ -42,7 +42,7 @@ class _CompulsoryTaskScreenState extends State<CompulsoryTaskScreen> {
             Navigator.pushReplacement<void, void>(
               context,
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => TaskScreen(),
+                builder: (BuildContext context) => const TaskScreen(),
               ),
             );
           }
@@ -50,7 +50,7 @@ class _CompulsoryTaskScreenState extends State<CompulsoryTaskScreen> {
             Navigator.pushReplacement<void, void>(
               context,
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => CompulsoryTaskScreen(),
+                builder: (BuildContext context) => const CompulsoryTaskScreen(),
               ),
             );
           }
@@ -97,7 +97,7 @@ class _CompulsoryTaskScreenState extends State<CompulsoryTaskScreen> {
                                   Opacity(
                                     opacity: task.showDeleteOpt ? 0.4:1 ,
                                     child: Container(
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(color:task.isComplete ? Colors.blueAccent:const Color(
                                           0x9AACE7DF),borderRadius: BorderRadius.circular(20)),
                                       

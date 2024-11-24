@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:outtaskapp/taskprovider.dart';
-import 'package:outtaskapp/temprorytaskscreen.dart';
+import 'package:outtaskapp/provider/task_provider.dart';
+import 'package:outtaskapp/view/temprory_task_screen.dart';
 import 'package:provider/provider.dart';
-import 'compulsorytaskprovider.dart';
+import 'provider/compulsorytask_provider.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

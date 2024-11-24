@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:outtaskapp/CompulsorytaskScreen.dart';
+import 'package:outtaskapp/view/compulsary_task_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:outtaskapp/taskprovider.dart';
+import 'package:outtaskapp/provider/task_provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -39,7 +39,6 @@ class _TaskScreenState extends State<TaskScreen> {
         _sharedFiles.addAll(value);
       });
     }, onError: (err) {
-      print("getIntentDataStream error: $err");
     });
 
     ReceiveSharingIntent.instance.getInitialMedia().then((value) {
@@ -83,14 +82,14 @@ class _TaskScreenState extends State<TaskScreen> {
               Navigator.pushReplacement<void, void>(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => CompulsoryTaskScreen(),
+                  builder: (BuildContext context) => const CompulsoryTaskScreen(),
                 ),
               );
             }
           },
         ),
         appBar: AppBar(
-          title: Text("Today's Tasks"),
+          title: const Text("Today's Tasks"),
           centerTitle: true,
           backgroundColor: Colors.blueAccent,
         ),
@@ -110,14 +109,12 @@ class _TaskScreenState extends State<TaskScreen> {
                          if(subtitle.contains("https://youtu.be/")){
                            String fullLink = subtitle;
                            String videoLink = fullLink.substring(17);
-                           print(videoLink);
                           await db.collection("username").doc("youtube").set({ 'src': videoLink});
                          }
                          else{
                            String fullLink = subtitle;
                            String rawvideoLink = fullLink.split("v=")[1];
                            String videoLink = rawvideoLink.split("&")[0]+"?"+rawvideoLink.split("&")[1];
-                           print(videoLink);
                           await db.collection("username").doc("youtube").set({ 'src': videoLink});
                          }
                         await _launchUrl();
@@ -125,9 +122,9 @@ class _TaskScreenState extends State<TaskScreen> {
 
                       },
                       child: Card(
-                        margin: EdgeInsets.all(7),
+                        margin: const EdgeInsets.all(7),
                         child: ListTile(
-                          contentPadding: EdgeInsets.all(12),
+                          contentPadding: const EdgeInsets.all(12),
                           tileColor: task.isComplete
                               ? Colors.blueAccent
                               : Colors.amberAccent,
@@ -146,16 +143,16 @@ class _TaskScreenState extends State<TaskScreen> {
                           ),
                           trailing: IconButton(
                             onPressed: () => value.removeTask(index),
-                            icon: Icon(Icons.delete, color: Colors.red, size: 26),
+                            icon: const Icon(Icons.delete, color: Colors.red, size: 26),
                           ),
                           title: Text(
                             task.title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 23),
                           ),
                           subtitle: Text(
                             task.Subtitle,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15, overflow: TextOverflow.ellipsis),
                           ),
                         ),
@@ -171,7 +168,7 @@ class _TaskScreenState extends State<TaskScreen> {
           backgroundColor: Colors.blue,
           onPressed: () {
           showBottomsheet(null);
-        }, child: Icon(Icons.add),)
+        }, child: const Icon(Icons.add),)
 
     );
   }
@@ -192,15 +189,15 @@ void showBottomsheet(String? subtitle){
                 TextField(
                   controller: _controller,
                   decoration:
-                  InputDecoration(labelText: 'Add a new task'),
+                  const InputDecoration(labelText: 'Add a new task'),
                 ),
                 TextField(
                   controller: _controller1,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Add a subtitle to task'),
                 ),
                 ElevatedButton(
-                    child: Text("Add"),
+                    child: const Text("Add"),
                     onPressed: () async {
                       if (_controller.text.isNotEmpty) {
                         tempProvider.addTask(
